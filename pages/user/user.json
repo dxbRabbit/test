@@ -1,0 +1,9 @@
+{
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "在线用户",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+
+  }
+}

@@ -1,0 +1,4 @@
+<!--pages/user/user.wxml-->
+<text>{{text}}</text>
+
+<view wx:for="{{array}}">{{index}}: {{item.message}}</view>

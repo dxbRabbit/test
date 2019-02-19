@@ -1,21 +1,39 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const order = ['red', 'yellow', 'blue', 'green', 'red']
+
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    toView: 'red',
-    scrollTop: 100
+    advertiseImage:'http://img8.zol.com.cn/bbs/upload/21650/21649969.jpg',
+    currentIndex :0,
+    locationAddr : "最新上架：10条",
+    imgUrls: [
+      'http://xdt.52cfzy.com/image/app_xz.jpg',
+      'http://xdt.52cfzy.com/image/xzindex1.jpg',
+      'http://xdt.52cfzy.com/image/xzindex2.jpg'
+    ],
+    colorList: [
+      'item-red',
+      'item-aqua',
+      'item-blue'
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 5000,
+    duration: 1000,
+    swiper_height:'140px'
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
+  },
+  onReady : function(){
+   
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -44,6 +62,22 @@ Page({
       //   }
       // })
     }
+    // setInterval(function(){
+    //     // console.log(new Date());  
+
+   
+    console.log(this.data.advertiseImage)
+    wx.getLocation({
+      type: 'gcj02', // 返回可以用于wx.openLocation的经纬度
+      success(res) {
+        // console.log(this);
+        // this.setData({
+        // locationAddr: res.latitude + "|" + res.longitude
+        // })
+        console.log(res.latitude + "|" + res.longitude)
+      }
+    })
+
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -54,28 +88,16 @@ Page({
       hasUserInfo: true
     })
   },
-  upper(e) {
-    console.log(e)
-  },
-  lower(e) {
-    console.log(e)
-  },
-  scroll(e) {
-    console.log(e)
-  },
-  tap(e) {
-    for (let i = 0; i < order.length; ++i) {
-      if (order[i] === this.data.toView) {
-        this.setData({
-          toView: order[i + 1]
-        })
-        break
-      }
-    }
-  },
-  tapMove(e) {
-    this.setData({
-      scrollTop: this.data.scrollTop + 10
+  onPullDownRefresh: function () {
+    // 用户触发了下拉刷新操作
+    // 拉取新数据重新渲染界面
+    console.log("-------------------用户触发了下拉刷新操作")
+    // wx.stopPullDownRefresh() // 可以停止当前页面的下拉刷新。
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
     })
+    console.log('onPullDownRefresh', new Date())
+  
   }
 })
